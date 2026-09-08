@@ -71,7 +71,7 @@ public class ServletCarrera extends HttpServlet {
                     } else if ("eliminar".equals(redir)) {
                         response.sendRedirect("carrera/eliminar.jsp");
                     } else {
-                        response.sendRedirect("carrera/buscar.jsp");
+                        response.sendRedirect("carrera/ver.jsp");
                     }
                     break;
 
