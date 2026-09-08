@@ -74,7 +74,7 @@ public class ServletUsuario extends HttpServlet {
                     } else if (redir != null && redir.equals("eliminar")) {
                         response.sendRedirect("usuario/eliminar.jsp");
                     } else {
-                        response.sendRedirect("usuario/buscar.jsp");
+                        response.sendRedirect("usuario/ver.jsp");
                     }
                     break;
 
