@@ -24,8 +24,9 @@
 
 <h3>Carreras Académicas</h3>
 <ul>
-    <li><a href="#">Listar Carreras (próximamente)</a></li>
-    <li><a href="#">Agregar Carrera (próximamente)</a></li>
+    <li><a href="carrera?accion=listartodo">Listar Carreras</a></li>
+    <li><a href="carrera/agregar.jsp">Agregar Carrera</a></li>
+    <li><a href="carrera/buscar.jsp">Buscar / Modificar / Eliminar Carrera</a></li>
 </ul>
 
 <br>
