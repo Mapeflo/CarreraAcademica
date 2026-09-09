@@ -95,6 +95,21 @@ public class ServletUsuario extends HttpServlet {
                     response.sendRedirect("usuario?accion=listartodo");
                     break;
 
+                case "reporteRol":
+                    String rol = request.getParameter("rol");
+                    List<Usuario> listaRol = crud.buscarPorRol(rol);
+                    sesion.setAttribute("usuario.reporte", listaRol);
+                    sesion.setAttribute("titulo.reporte", "Usuarios con rol: " + rol);
+                    response.sendRedirect("usuario/reporte.jsp");
+                    break;
+
+                case "reporteNombre":
+                    String nombreBuscar = request.getParameter("nombre");
+                    List<Usuario> listaNombre = crud.buscarPorNombre(nombreBuscar);
+                    sesion.setAttribute("usuario.reporte", listaNombre);
+                    sesion.setAttribute("titulo.reporte", "Usuarios que contienen: " + nombreBuscar);
+                    response.sendRedirect("usuario/reporte.jsp");
+                    break;
                 default:
                     response.sendRedirect("index.jsp");
             }

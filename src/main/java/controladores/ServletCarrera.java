@@ -99,6 +99,24 @@ public class ServletCarrera extends HttpServlet {
                     response.sendRedirect("carrera?accion=listartodo");
                     break;
 
+                case "reporteUniversidadNivel":
+                    String universidad = request.getParameter("universidad");
+                    String nivel = request.getParameter("nivelFormacion");
+                    List<CarreraAcademica> lista1 = crud.buscarPorUniversidadYNivel(universidad, nivel);
+                    sesion.setAttribute("carrera.reporte", lista1);
+                    sesion.setAttribute("titulo.reporte", "Carreras de " + universidad + " - Nivel: " + nivel);
+                    response.sendRedirect("carrera/reporte.jsp");
+                    break;
+
+                case "reporteAcreditadasRango":
+                    double min = Double.parseDouble(request.getParameter("valorMin"));
+                    double max = Double.parseDouble(request.getParameter("valorMax"));
+                    List<CarreraAcademica> lista2 = crud.buscarAcreditadasPorRangoValor(min, max);
+                    sesion.setAttribute("carrera.reporte", lista2);
+                    sesion.setAttribute("titulo.reporte", "Carreras acreditadas entre $" + min + " y $" + max);
+                    response.sendRedirect("carrera/reporte.jsp");
+                    break;
+
                 default:
                     response.sendRedirect("index.jsp");
             }
