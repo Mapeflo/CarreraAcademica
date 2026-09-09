@@ -133,4 +133,53 @@ public class CRUDUsuario {
         }
         return logueado;
     }
+    // Reporte 1: Buscar por rol
+    public List<Usuario> buscarPorRol(String rol) throws Exception {
+        List<Usuario> lista = new ArrayList<>();
+        try {
+            baseDatos.conectar();
+            String sql = "SELECT * FROM usuario WHERE rol = ?";
+            PreparedStatement ps = baseDatos.crearSentencia(sql);
+            ps.setString(1, rol);
+            ResultSet rs = baseDatos.consultar(ps);
+
+            while (rs.next()) {
+                Usuario u = new Usuario();
+                u.setId(rs.getInt("id"));
+                u.setClave(rs.getString("clave"));
+                u.setNombre(rs.getString("nombre"));
+                u.setRol(rs.getString("rol"));
+                u.setEmail(rs.getString("email"));
+                lista.add(u);
+            }
+        } finally {
+            baseDatos.desconectar();
+        }
+        return lista;
+    }
+
+    // Reporte 2: Buscar por nombre (parcial)
+    public List<Usuario> buscarPorNombre(String nombre) throws Exception {
+        List<Usuario> lista = new ArrayList<>();
+        try {
+            baseDatos.conectar();
+            String sql = "SELECT * FROM usuario WHERE nombre LIKE ?";
+            PreparedStatement ps = baseDatos.crearSentencia(sql);
+            ps.setString(1, "%" + nombre + "%");
+            ResultSet rs = baseDatos.consultar(ps);
+
+            while (rs.next()) {
+                Usuario u = new Usuario();
+                u.setId(rs.getInt("id"));
+                u.setClave(rs.getString("clave"));
+                u.setNombre(rs.getString("nombre"));
+                u.setRol(rs.getString("rol"));
+                u.setEmail(rs.getString("email"));
+                lista.add(u);
+            }
+        } finally {
+            baseDatos.desconectar();
+        }
+        return lista;
+    }
 }

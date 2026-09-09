@@ -134,4 +134,69 @@ public class CRUDCarreraAcademica {
         }
         return lista;
     }
+    // Reporte 1: Buscar por Universidad + Nivel de Formación
+    public List<CarreraAcademica> buscarPorUniversidadYNivel(String universidad, String nivelFormacion) throws Exception {
+        List<CarreraAcademica> lista = new ArrayList<>();
+        try {
+            baseDatos.conectar();
+            String sql = "SELECT * FROM carrera_academica WHERE universidad LIKE ? AND nivelFormacion = ?";
+            PreparedStatement ps = baseDatos.crearSentencia(sql);
+            ps.setString(1, "%" + universidad + "%");
+            ps.setString(2, nivelFormacion);
+            ResultSet rs = baseDatos.consultar(ps);
+
+            while (rs.next()) {
+                CarreraAcademica c = new CarreraAcademica();
+                c.setId(rs.getInt("id"));
+                c.setNombre(rs.getString("nombre"));
+                c.setNumCreditos(rs.getInt("numCreditos"));
+                c.setNumAsignaturas(rs.getInt("numAsignaturas"));
+                c.setNumSemestres(rs.getInt("numSemestres"));
+                c.setNivelFormacion(rs.getString("nivelFormacion"));
+                c.setTitulo(rs.getString("titulo"));
+                c.setValorSemestre(rs.getDouble("valorSemestre"));
+                c.setUniversidad(rs.getString("universidad"));
+                c.setEsAcreditada(rs.getBoolean("esAcreditada"));
+                c.setPerfiles(rs.getString("perfiles"));
+                c.setAreaConocimiento(rs.getString("areaConocimiento"));
+                lista.add(c);
+            }
+        } finally {
+            baseDatos.desconectar();
+        }
+        return lista;
+    }
+
+    // Reporte 2: Carreras Acreditadas con valor de semestre entre un rango
+    public List<CarreraAcademica> buscarAcreditadasPorRangoValor(double valorMin, double valorMax) throws Exception {
+        List<CarreraAcademica> lista = new ArrayList<>();
+        try {
+            baseDatos.conectar();
+            String sql = "SELECT * FROM carrera_academica WHERE esAcreditada = true AND valorSemestre BETWEEN ? AND ?";
+            PreparedStatement ps = baseDatos.crearSentencia(sql);
+            ps.setDouble(1, valorMin);
+            ps.setDouble(2, valorMax);
+            ResultSet rs = baseDatos.consultar(ps);
+
+            while (rs.next()) {
+                CarreraAcademica c = new CarreraAcademica();
+                c.setId(rs.getInt("id"));
+                c.setNombre(rs.getString("nombre"));
+                c.setNumCreditos(rs.getInt("numCreditos"));
+                c.setNumAsignaturas(rs.getInt("numAsignaturas"));
+                c.setNumSemestres(rs.getInt("numSemestres"));
+                c.setNivelFormacion(rs.getString("nivelFormacion"));
+                c.setTitulo(rs.getString("titulo"));
+                c.setValorSemestre(rs.getDouble("valorSemestre"));
+                c.setUniversidad(rs.getString("universidad"));
+                c.setEsAcreditada(rs.getBoolean("esAcreditada"));
+                c.setPerfiles(rs.getString("perfiles"));
+                c.setAreaConocimiento(rs.getString("areaConocimiento"));
+                lista.add(c);
+            }
+        } finally {
+            baseDatos.desconectar();
+        }
+        return lista;
+    }
 }
