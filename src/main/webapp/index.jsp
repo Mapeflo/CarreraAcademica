@@ -20,6 +20,7 @@
     <li><a href="usuario?accion=listartodo">Listar Usuarios</a></li>
     <li><a href="usuario/agregar.jsp">Agregar Usuario</a></li>
     <li><a href="usuario/buscar.jsp">Buscar / Modificar / Eliminar Usuario</a></li>
+    <li><a href="usuario/reportes.jsp">Reportes de Usuarios</a></li>
 </ul>
 
 <h3>Carreras Académicas</h3>
@@ -27,6 +28,7 @@
     <li><a href="carrera?accion=listartodo">Listar Carreras</a></li>
     <li><a href="carrera/agregar.jsp">Agregar Carrera</a></li>
     <li><a href="carrera/buscar.jsp">Buscar / Modificar / Eliminar Carrera</a></li>
+    <li><a href="carrera/reportes.jsp">Reportes de Carreras</a></li>
 </ul>
 
 <br>
