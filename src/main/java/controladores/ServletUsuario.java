@@ -10,6 +10,7 @@ import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 import modelo.CRUDUsuario;
 import modelo.Usuario;
+import modelo.EmailUtil;
 
 @WebServlet(name = "ServletUsuario", urlPatterns = {"/usuario"})
 public class ServletUsuario extends HttpServlet {
@@ -109,6 +110,24 @@ public class ServletUsuario extends HttpServlet {
                     sesion.setAttribute("usuario.reporte", listaNombre);
                     sesion.setAttribute("titulo.reporte", "Usuarios que contienen: " + nombreBuscar);
                     response.sendRedirect("usuario/reporte.jsp");
+                    break;
+
+                case "recuperarClave":
+                    String email = request.getParameter("email");
+                    Usuario usuarioEncontrado = crud.buscarPorEmail(email);
+
+                    if (usuarioEncontrado != null) {
+                        String asunto = "Recuperación de clave - Sistema Carrera Académica";
+                        String mensaje = "Hola " + usuarioEncontrado.getNombre() + ",\n\n"
+                                + "Has solicitado recuperar tu clave.\n"
+                                + "Tu clave actual es: " + usuarioEncontrado.getClave() + "\n\n"
+                                + "Saludos,\nSistema de Carreras Académicas";
+
+                        EmailUtil.enviarCorreo(email, asunto, mensaje);
+                        response.sendRedirect("mensaje.jsp?mensaje=Se ha enviado tu clave al correo: " + email);
+                    } else {
+                        response.sendRedirect("mensaje.jsp?mensaje=No se encontró ningún usuario con ese correo");
+                    }
                     break;
                 default:
                     response.sendRedirect("index.jsp");

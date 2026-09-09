@@ -182,4 +182,27 @@ public class CRUDUsuario {
         }
         return lista;
     }
+    // Buscar usuario por email (recuperación de clave)
+    public Usuario buscarPorEmail(String email) throws Exception {
+        Usuario encontrado = null;
+        try {
+            baseDatos.conectar();
+            String sql = "SELECT * FROM usuario WHERE email = ?";
+            PreparedStatement ps = baseDatos.crearSentencia(sql);
+            ps.setString(1, email);
+            ResultSet rs = baseDatos.consultar(ps);
+
+            if (rs.next()) {
+                encontrado = new Usuario();
+                encontrado.setId(rs.getInt("id"));
+                encontrado.setClave(rs.getString("clave"));
+                encontrado.setNombre(rs.getString("nombre"));
+                encontrado.setRol(rs.getString("rol"));
+                encontrado.setEmail(rs.getString("email"));
+            }
+        } finally {
+            baseDatos.desconectar();
+        }
+        return encontrado;
+    }
 }

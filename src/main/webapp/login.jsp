@@ -22,6 +22,10 @@
 
     <input type="submit" value="Ingresar">
 </form>
+
+<br><br>
+<a href="recuperar.jsp">¿Olvidaste tu clave?</a>
+
 </body>
 </html>
 
