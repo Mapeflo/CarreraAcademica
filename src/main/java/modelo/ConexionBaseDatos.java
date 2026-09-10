@@ -9,12 +9,12 @@ import java.sql.SQLException;
 public class ConexionBaseDatos {
 
     private String driver = "com.mysql.cj.jdbc.Driver";
-    private String nombreIPServidorBD = "localhost";
+    private String nombreIPServidorBD = "mysql.railway.internal";
     private String url = "jdbc:mysql://";
     private String puertoServidorBD = "3306";
     private String usuarioBD = "root";
-    private String passwordUsuarioBD = "";
-    private String nombreBD = "academica_db";
+    private String passwordUsuarioBD = "PvjklvFyUEQRFTpuQxZFzoxrsnwiUUNH";
+    private String nombreBD = "railway";
 
     private Connection conexion;
     private PreparedStatement sentencia;
